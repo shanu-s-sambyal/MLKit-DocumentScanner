@@ -21,8 +21,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
@@ -31,9 +35,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.example.mlkitdocumentscanner.ui.theme.MLKitDocumentScannerTheme
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
-//import com.google.mlkit.vision.documentscanner.GmsDocumentScanner
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
+import java.io.File
+import java.io.FileOutputStream
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,7 +94,7 @@ class MainActivity : ComponentActivity() {
                         }
                         Button(onClick = {
                             scanner.getStartScanIntent(this@MainActivity)
-                                .addOnSucessListener{
+                                .addOnSuccessListener{
                                     scannerLauncher.launch(
                                         IntentSenderRequest.Builder(it)
                                             .build()
